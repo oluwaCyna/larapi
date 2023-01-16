@@ -35,7 +35,7 @@ class General extends Controller
      */
     public function store(Request $request)
     {
-        $validation = validator($request->all(), [
+        validator($request->all(), [
             'first_name' =>  ['required','max:50', 'string'],
             'last_name' =>  ['required','max:50', 'string'],
             'phone' => ['required','max:11', 'string'],
@@ -43,18 +43,15 @@ class General extends Controller
             'address'=> ['required','max:50', 'string'],
         ]);
 
-        $query = GeneralModel::create([
+        GeneralModel::create([
             'first_name' =>  $request->first_name,
             'last_name' =>   $request->last_name,
             'phone' =>  $request->phone,
             'email' =>  $request->email,
             'address'=>  $request->address,
         ]);
-        if ($query) {
-            return "Data saved successfully";
-        }else {
-            return "Data not saved successfully, Try again";
-        }
+        return "Data saved successfully";
+
     }
 
     /**
@@ -88,7 +85,7 @@ class General extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validation = validator($request->all(), [
+        validator($request->all(), [
             'first_name' =>  ['required','max:50', 'string'],
             'last_name' =>  ['required','max:50', 'string'],
             'phone' => ['required','max:11', 'string'],
@@ -96,18 +93,14 @@ class General extends Controller
             'address'=> ['required','max:50', 'string'],
         ]);
 
-        $query = GeneralModel::where('id', $id)->update([
+        GeneralModel::where('id', $id)->update([
             'first_name' =>  $request->first_name,
             'last_name' =>   $request->last_name,
             'phone' =>  $request->phone,
             'email' =>  $request->email,
             'address'=>  $request->address,
         ]);
-        if ($query) {
-            return "Data updated successfully";
-        }else {
-            return "Data not updated successfully, Try again";
-        }
+        return "Data updated successfully";
     }
 
     /**
@@ -118,11 +111,7 @@ class General extends Controller
      */
     public function destroy($id)
     {
-        $query = GeneralModel::where('id', $id)->delete();
-        if ($query) {
-            return "Data deleted successfully";
-        }else {
-            return "Data not deleted successfully, Try again";
-        }
+        GeneralModel::where('id', $id)->delete();
+        return "Data deleted successfully";
     }
 }

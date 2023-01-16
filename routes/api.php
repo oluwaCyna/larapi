@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\api\LoginController;
+use App\Http\Controllers\api\RegisterController;
 use App\Http\Controllers\General;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,3 +22,11 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::resource('general', General::class);
+
+Route::post('register', [RegisterController::class, 'register'])->name('register');
+
+Route::post('login', [LoginController::class, 'login'])->name('login');
+
+// Route::get('user', [LoginController::class, 'user'])->name('user');
+
+Route::get('user/{id}', [LoginController::class, 'unitUser'])->middleware('auth:api')->name('unitUser');
